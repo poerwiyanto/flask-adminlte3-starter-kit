@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{ config['APP_NAME'] }} | {{ _('Daftar') }}</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/adminlte.min.css') }}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="register-logo">{{ config['APP_NAME'] }}</div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <form action="{{ url_for('index.register') }}" method="POST">
+        {{ form.csrf_token }}
+        <div class="input-group mb-3">
+          {% if form.name.errors|length > 0 %}
+            {% set class_ = ' is-invalid' %}
+          {% endif %}
+          {{ form.name(class_='form-control{class_}'.format(class_=class_), placeholder=_('Nama lengkap')) }}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+          <div class="invalid-feedback">
+            {{ form.name.errors|join(' ') }}
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          {% if form.username.errors|length > 0 %}
+            {% set class_ = ' is-invalid' %}
+          {% endif %}
+          {{ form.username(class_='form-control{class_}'.format(class_=class_), placeholder=_('Nama pengguna')) }}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+          <div class="invalid-feedback">
+            {{ form.username.errors|join(' ') }}
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          {% if form.password.errors|length > 0 %}
+            {% set class_ = ' is-invalid' %}
+          {% endif %}
+          {{ form.password(class_='form-control{class_}'.format(class_=class_), placeholder=_('Kata sandi')) }}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+          <div class="invalid-feedback">
+            {{ form.password.errors|join(' ') }}
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          {% if form.retype_password.errors|length > 0 %}
+            {% set class_ = ' is-invalid' %}
+          {% endif %}
+          {{ form.retype_password(class_='form-control{class_}'.format(class_=class_), placeholder=_('Ketik ulang kata sandi')) }}
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+          <div class="invalid-feedback">
+            {{ form.retype_password.errors|join(' ') }}
+          </div>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">{{ _('Daftar') }}</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+      <a href="{{ url_for('index.login') }}" class="text-center">{{ _('Saya sudah terdaftar.') }}</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery -->
+<script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
