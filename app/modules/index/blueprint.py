@@ -1,23 +1,22 @@
 from .forms import LoginForm, RegisterForm
 from .models import User, db
-from app import app
 from app.utils.decorators import breadcrumb, is_logged_in
 from app.utils.flash_msgs import FAILED_LOGIN, REGISTERED_MSG
 from flask import\
     Blueprint, flash, redirect, render_template, request, session, url_for
 from flask_babel import _
+from flask_menu import register_menu
 import bcrypt
 
 mod_index = Blueprint('index', __name__, url_prefix='/')
 
 
 @mod_index.route('/')
+@mod_index.route('/home')
 @is_logged_in
-@breadcrumb('Home')
+@breadcrumb(_('Beranda'))
+@register_menu(mod_index, '.home', _('Beranda'))
 def index():
-    print(session)
-    print(app.permanent_session_lifetime)
-
     return render_template(
         'index/index.html',
         title=_('Beranda'))
@@ -57,6 +56,7 @@ def login():
 
 
 @mod_index.route('/logout')
+@register_menu(mod_index, '.logout', _('Keluar'), order=1000)
 def logout():
     """Pop necessary session keys."""
     session.pop('breadcrumbs', None)
