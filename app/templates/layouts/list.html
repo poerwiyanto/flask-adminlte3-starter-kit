@@ -1,0 +1,77 @@
+{% extends '{path}/base.html'.format(path=path) %}
+
+{% block adminlte_plugins_css %}
+<!-- DataTables -->
+<link rel="stylesheet" href="{{ url_for('static', filename='plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+{% endblock %}
+
+{% block adminlte_plugins_js %}
+<!-- DataTables -->
+<script src="{{ url_for('static', filename='plugins/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+{% endblock %}
+
+{% block custom_scripts %}
+<script type="text/javascript">
+    function initDataTable() {
+        var options = {
+            columnDefs: [{
+                orderable: false,
+                targets: "no-sort"
+            }]
+        };
+        if ($(window).width() <= 768) {
+            options.pagingType = "full";
+            options.scrollCollapse = true;
+            options.scrollX = true;
+        } else {
+            options.pagingType = "full_numbers";
+        }
+        $("#data_table").DataTable().destroy();
+        $("#data_table").DataTable(options);
+    }
+
+    $(function() {
+        initDataTable();
+    });
+
+    $(window).resize(function() {
+        initDataTable();
+    });
+</script>
+{% endblock %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ title }}</h3>
+        </div>
+        <div class="card-body">
+            {% block buttons %}
+            {% endblock %}
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-hover table-striped" id="data_table">
+                <thead>
+                    {% block thead %}
+                    {% endblock %}
+                </thead>
+                <tbody>
+                    {% block tbody %}
+                    {% endblock %}
+                </tbody>
+                <tfoot>
+                    {% block tfoot %}
+                        {{ self.thead() }}
+                    {% endblock %}
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

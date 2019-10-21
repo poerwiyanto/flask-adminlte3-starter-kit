@@ -13,6 +13,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='plugins/toastr/toastr.min.css') }}">
+  {% block adminlte_plugins_css %}
+  {% endblock %}
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
@@ -35,7 +39,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="{{ url_for('static', filename='img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">{{ config['APP_NAME'] }}</span>
@@ -149,6 +153,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- Toastr -->
+<script src="{{ url_for('static', filename='plugins/toastr/toastr.min.js') }}"></script>
+{% block adminlte_plugins_js %}
+{% endblock %}
 <!-- AdminLTE App -->
 <script src="{{ url_for('static', filename='js/adminlte.min.js') }}"></script>
 <script type="text/javascript">
@@ -162,5 +170,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     {% endwith %}
   });
 </script>
+{% block custom_scripts %}
+{% endblock %}
 </body>
 </html>

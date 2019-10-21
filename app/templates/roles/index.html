@@ -1,0 +1,24 @@
+{% set path = './layouts' %}
+{% extends '{path}/list.html'.format(path=path) %}
+
+{% block buttons %}
+<a class="btn btn-primary" href="{{ url_for('roles.add') }}"><i class="fas fa-plus"></i> {{ _('Tambah') }}</a>
+{% endblock %}
+
+{% block tbody %}
+    {% for row in data %}
+        <tr>
+            <td>{{ row['name'] }}</td>
+            <td>
+                <a class="btn btn-default btn-sm" href="{{ url_for('roles.edit', id=row['id']) }}"><i class="fas fa-edit"></i> {{ _('Ubah') }}</a>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
+
+{% block thead %}
+<tr>
+    <th>{{ _('Grup') }}</th>
+    <th class="no-sort"></th>
+</tr>
+{% endblock %}

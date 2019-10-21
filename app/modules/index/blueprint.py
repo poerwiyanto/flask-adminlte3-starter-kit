@@ -15,7 +15,7 @@ mod_index = Blueprint('index', __name__, url_prefix='/')
 @mod_index.route('/home')
 @is_logged_in
 @breadcrumb(_('Beranda'))
-@register_menu(mod_index, '.home', _('Beranda'))
+@register_menu(mod_index, 'home', _('Beranda'))
 def index():
     return render_template(
         'index/index.html',
@@ -56,7 +56,7 @@ def login():
 
 
 @mod_index.route('/logout')
-@register_menu(mod_index, '.logout', _('Keluar'), order=1000)
+@register_menu(mod_index, 'logout', _('Keluar'), order=1000)
 def logout():
     """Pop necessary session keys."""
     session.pop('breadcrumbs', None)

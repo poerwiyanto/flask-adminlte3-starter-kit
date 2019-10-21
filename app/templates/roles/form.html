@@ -1,0 +1,33 @@
+{% extends './layouts/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ title }}</h3>
+        </div>
+        <div class="card-body">
+            <form action="{{ action }}" method="POST">
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    {% if form.name.errors|length > 0 %}
+                        {% set class_ = ' is-invalid' %}
+                    {% endif %}
+                    <label for="name">{{ _('Nama') }}</label>
+                    {{ form.name(class_='form-control{class_}'.format(class_=class_), placeholder=_('Nama')) }}
+                    <div class="invalid-feedback">
+                        {{ form.name.errors|join(' ') }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">{{ submit_text }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
